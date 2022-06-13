@@ -2,16 +2,24 @@ plugins {
     id 'java-gradle-plugin'
     id 'com.gradle.plugin-publish' version '0.12.0'
     id 'groovy'
+    id 'java'
     id 'maven-publish'
+    id 'io.moderne.rewrite' version '0.15.0-dev.0+317f17e'
     id 'com.github.hierynomus.license' version '0.15.0'
 }
 
 repositories {
     jcenter()
+    mavenLocal()
 }
 
 dependencies {
     testImplementation 'org.spockframework:spock-core:1.3-groovy-2.5'
+}
+
+rewrite {
+    activeRecipe("org.openrewrite.gradle.Test")
+    configFile = project.getRootProject().file("test-gradle.yml")
 }
 
 group = "one.chest"
